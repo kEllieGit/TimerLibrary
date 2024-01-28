@@ -36,7 +36,8 @@ namespace Timers
             check(InWorld != nullptr);
 
             World->GetTimerManager().SetTimer(Handle, Callback.GetValue().Get<FTimerDelegate>(), Delay, Loop);
-        };        
+        };
+
         /// @brief Initializes this timer with a FTimerDynamicDelegate Callback.
         /// @param World context required for the timer to function.
         /// @param Delay (in seconds) until we call the provided callback.
@@ -86,6 +87,12 @@ namespace Timers
         /// @brief Returns whether this timer exists in the TimerManager.
         bool IsValid() const;
     private:
+        /// @brief The delay until the callback gets called when this timer is created.
+        float Delay;
+
+        /// @brief If this timer is set to loop.
+        bool Loop;
+            
         /// @brief Type of Callback used for this timer.
         TOptional<CallbackVariant> Callback;
 
@@ -94,11 +101,5 @@ namespace Timers
 
         /// @brief World context required for the timer to function.
         UWorld* World;
-
-        /// @brief The delay until the callback gets called when this timer is created.
-        float Delay;
-
-        /// @brief If this timer is set to loop.
-        bool Loop;
     };
 }
